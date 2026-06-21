@@ -10,7 +10,7 @@ import logging
 import pandas as pd
 
 from app.celery_app import celery_app
-from app.db import SessionLocal
+from app import db as db_module
 from app.llm.factory import get_llm_client
 from app.models import Job, JobStatus, JobSummary, Transaction
 from app.pipeline import orchestrator
@@ -68,7 +68,7 @@ def _persist(db, job: Job, result: orchestrator.PipelineResult) -> None:
 
 @celery_app.task(name="process_job")
 def process_job(job_id: int) -> None:
-    db = SessionLocal()
+    db = db_module.SessionLocal()
     try:
         job = repository.get_job(db, job_id)
         if job is None:
