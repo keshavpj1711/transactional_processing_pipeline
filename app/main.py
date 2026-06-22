@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 
-from app.api import jobs
+from app.api import jobs, models
 
 
 def create_app() -> FastAPI:
@@ -17,6 +17,7 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     app.include_router(jobs.router)
+    app.include_router(models.router)
     return app
 
 

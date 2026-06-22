@@ -20,8 +20,23 @@ class Settings(BaseSettings):
     # LLM (OpenRouter, OpenAI-compatible)
     openrouter_api_key: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
-    llm_model: str = "meta-llama/llama-3.3-70b-instruct:free"
+    # An explicit model id pins the choice. Left blank, the best available free
+    # model is selected automatically (free models are frequently rate limited,
+    # so a fixed choice can be unavailable at any moment).
+    llm_model: str = ""
     use_stub_llm: bool = False
+
+    # Ordered by preference; the first that responds (not rate limited) is used
+    # when no explicit llm_model is set.
+    llm_model_preferences: list[str] = [
+        "openai/gpt-oss-120b:free",
+        "nvidia/nemotron-3-super-120b-a12b:free",
+        "qwen/qwen3-next-80b-a3b-instruct:free",
+        "meta-llama/llama-3.3-70b-instruct:free",
+        "openai/gpt-oss-20b:free",
+        "nvidia/nemotron-nano-9b-v2:free",
+        "google/gemma-4-31b-it:free",
+    ]
 
     # Pipeline tuning
     llm_classify_batch_size: int = 20

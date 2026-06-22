@@ -9,6 +9,24 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict
 
 
+class FreeModel(BaseModel):
+    """A free model offered by the LLM provider."""
+
+    id: str | None = None
+    name: str | None = None
+    context_length: int | None = None
+
+
+class SelectedModel(BaseModel):
+    """The model the pipeline will use for the next job."""
+
+    model_config = ConfigDict(protected_namespaces=())
+
+    model: str | None = None
+    source: str  # "pinned", "auto-selected", or "stub"
+    reason: str | None = None
+
+
 class JobCreatedResponse(BaseModel):
     """Returned immediately from the upload endpoint."""
 
