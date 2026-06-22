@@ -28,6 +28,15 @@ def test_parse_classify_malformed_json_raises():
         prompts.parse_classify_response("not json at all", {0})
 
 
+def test_parse_empty_or_none_content_raises():
+    # Some models return null/empty content; that must be a clean ValueError,
+    # not an AttributeError, so the caller can retry or fail soft.
+    with pytest.raises(ValueError):
+        prompts.parse_classify_response("", {0})
+    with pytest.raises(ValueError):
+        prompts.parse_narrative_response(None)
+
+
 def test_parse_classify_empty_results_raises():
     with pytest.raises(ValueError):
         prompts.parse_classify_response('{"results": []}', {0})

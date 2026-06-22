@@ -55,7 +55,10 @@ class OpenRouterClient(LLMClient):
             try:
                 resp = httpx.post(url, json=payload, headers=headers, timeout=self._timeout)
                 resp.raise_for_status()
-                return resp.json()["choices"][0]["message"]["content"]
+                content = resp.json()["choices"][0]["message"].get("content")
+                if not content:
+                    raise ValueError("model returned empty content")
+                return content
             except Exception as exc:  # noqa: BLE001 - retry any transport/response error
                 last_error = exc
                 wait = 2 ** attempt

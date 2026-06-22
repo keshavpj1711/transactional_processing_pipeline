@@ -41,6 +41,8 @@ def build_narrative_prompt(stats: dict) -> str:
 
 def _extract_json(text: str) -> dict:
     """Pull a JSON object out of a model response, tolerating code fences."""
+    if not text:
+        raise ValueError("empty model response")
     cleaned = text.strip()
     if cleaned.startswith("```"):
         # Strip a leading ```json / ``` fence and the trailing fence.
