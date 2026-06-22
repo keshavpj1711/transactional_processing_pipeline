@@ -13,8 +13,8 @@
           <mxGeometry x="60" y="300" width="140" height="70" as="geometry" />
         </mxCell>
 
-        <mxCell id="api" value="FastAPI (api)&#10;POST /jobs/upload&#10;GET /jobs/{id}/status&#10;GET /jobs/{id}/results&#10;GET /jobs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;" vertex="1" parent="1">
-          <mxGeometry x="300" y="120" width="220" height="120" as="geometry" />
+        <mxCell id="api" value="FastAPI (api)&#10;POST /jobs/upload&#10;GET /jobs/{id}/status&#10;GET /jobs/{id}/results&#10;GET /jobs?status=&#10;GET /models/free&#10;GET /models/selected&#10;GET /health" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;align=left;spacingLeft=10;verticalAlign=top;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="290" y="110" width="240" height="160" as="geometry" />
         </mxCell>
 
         <mxCell id="redis" value="Redis&#10;(Celery broker)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
@@ -25,8 +25,8 @@
           <mxGeometry x="600" y="300" width="220" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="llm" value="LLM&#10;OpenRouter&#10;(or offline stub)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="900" y="315" width="150" height="80" as="geometry" />
+        <mxCell id="llm" value="LLM&#10;OpenRouter&#10;(auto-selects best free model;&#10;falls back to offline stub)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="890" y="305" width="180" height="100" as="geometry" />
         </mxCell>
 
         <mxCell id="pg" value="PostgreSQL&#10;jobs / transactions / job_summaries" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
